@@ -1,0 +1,839 @@
+{
+  "Application": {
+    "Screens": [
+      {
+        "Name": "Screen1",
+        "CanvasBufferSize": 4800,
+        "Components": [
+          {
+            "Type": "Image",
+            "Name": "backgtound",
+            "Width": 320,
+            "Height": 240,
+            "RelativeFilename": "backsmall.png"
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "b2",
+            "X": 211,
+            "Y": 38,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 8
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "b3",
+            "X": 177,
+            "Y": 38,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 8
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "b7",
+            "X": 41,
+            "Y": 38,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 8
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "b8",
+            "X": 7,
+            "Y": 38,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 8
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "b1",
+            "X": 245,
+            "Y": 38,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 8
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "b0",
+            "X": 279,
+            "Y": 38,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 8
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "b6",
+            "X": 75,
+            "Y": 38,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 8
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "b5",
+            "X": 109,
+            "Y": 38,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 8
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "b4",
+            "X": 143,
+            "Y": 38,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 7
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "g4",
+            "X": 143,
+            "Y": 55,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 28
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "g5",
+            "X": 109,
+            "Y": 55,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 28
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "g6",
+            "X": 75,
+            "Y": 55,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 28
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "g0",
+            "X": 279,
+            "Y": 55,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 28
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "g1",
+            "X": 245,
+            "Y": 55,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 28
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "g8",
+            "X": 7,
+            "Y": 55,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 28
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "g7",
+            "X": 41,
+            "Y": 55,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 28
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "g3",
+            "X": 177,
+            "Y": 55,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 28
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "g2",
+            "X": 211,
+            "Y": 55,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 28
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "r4",
+            "X": 143,
+            "Y": 72,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 48
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "r5",
+            "X": 109,
+            "Y": 72,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 48
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "r6",
+            "X": 75,
+            "Y": 72,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 48
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "r0",
+            "X": 279,
+            "Y": 72,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 48
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "r1",
+            "X": 245,
+            "Y": 72,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 48
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "y0",
+            "X": 279,
+            "Y": 89,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 87
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "r8",
+            "X": 7,
+            "Y": 72,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 48
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "r7",
+            "X": 41,
+            "Y": 72,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 48
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "r3",
+            "X": 177,
+            "Y": 72,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 48
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "r2",
+            "X": 211,
+            "Y": 72,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 48
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "y4",
+            "X": 143,
+            "Y": 89,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 87
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "y5",
+            "X": 109,
+            "Y": 89,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 87
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "y6",
+            "X": 75,
+            "Y": 89,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 87
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "y1",
+            "X": 245,
+            "Y": 89,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 87
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "y8",
+            "X": 7,
+            "Y": 89,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 87
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "y7",
+            "X": 41,
+            "Y": 89,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 87
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "y3",
+            "X": 177,
+            "Y": 89,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 87
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "y2",
+            "X": 211,
+            "Y": 89,
+            "Width": 34,
+            "Height": 17,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 7,
+            "OffsetY": 87
+          },
+          {
+            "Type": "TiledImage",
+            "Name": "paddle",
+            "X": 133,
+            "Y": 211,
+            "Width": 61,
+            "Height": 15,
+            "FileName": "breakout_pieces.png",
+            "OffsetX": 146,
+            "OffsetY": 153
+          },
+          {
+            "Type": "ScalableImage",
+            "Name": "ball",
+            "X": 68,
+            "Y": 120,
+            "Width": 15,
+            "Height": 15,
+            "Filename": "ball.png",
+            "ScalingAlgorithm": "Nearest-neighbor"
+          },
+          {
+            "Type": "TextArea",
+            "Name": "gameOver",
+            "X": 106,
+            "Y": 38,
+            "Width": 115,
+            "Height": 24,
+            "Visible": false,
+            "TextId": "__SingleUse_2ZZ1",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 250,
+              "Green": 240,
+              "Blue": 240
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "Circle",
+            "Name": "livesCircle",
+            "Width": 41,
+            "Height": 38,
+            "Color": {
+              "Red": 14,
+              "Green": 176,
+              "Blue": 235
+            },
+            "CenterX": 20.0,
+            "CenterY": 20.0,
+            "Radius": 15.0,
+            "EndAngle": 360.0,
+            "CapPrecision": "Butt",
+            "Alpha": 78
+          },
+          {
+            "Type": "TextArea",
+            "Name": "livesTextArea",
+            "X": 14,
+            "Y": 7,
+            "Width": 13,
+            "Height": 24,
+            "TextId": "__SingleUse_MMZM",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 240,
+              "Green": 228,
+              "Blue": 228
+            },
+            "Alpha": 144,
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "livesText",
+              "UseBuffer": true,
+              "BufferSize": 2
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "scoreTextArea",
+            "X": 141,
+            "Y": 9,
+            "Width": 39,
+            "Height": 24,
+            "TextId": "__SingleUse_G2QH",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 230,
+              "Green": 189,
+              "Blue": 7
+            },
+            "Alpha": 128,
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "scoreboard",
+              "UseBuffer": true,
+              "BufferSize": 4
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "youWin",
+            "X": 114,
+            "Y": 117,
+            "Width": 89,
+            "Height": 24,
+            "Visible": false,
+            "TextId": "__SingleUse_AJV9",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 237,
+              "Green": 211,
+              "Blue": 211
+            },
+            "AutoSize": true
+          },
+          {
+            "Type": "TextArea",
+            "Name": "hs0",
+            "X": 58,
+            "Y": 68,
+            "Width": 52,
+            "Height": 24,
+            "Visible": false,
+            "TextId": "__SingleUse_NXMP",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 239,
+              "Green": 245,
+              "Blue": 237
+            },
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "hs0Buffer",
+              "UseBuffer": true,
+              "BufferSize": 5
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "hs1",
+            "X": 58,
+            "Y": 92,
+            "Width": 52,
+            "Height": 24,
+            "Visible": false,
+            "TextId": "__SingleUse_TRK7",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 239,
+              "Green": 245,
+              "Blue": 237
+            },
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "hs1Buffer",
+              "UseBuffer": true,
+              "BufferSize": 5
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "hs2",
+            "X": 58,
+            "Y": 116,
+            "Width": 52,
+            "Height": 24,
+            "Visible": false,
+            "TextId": "__SingleUse_7SYM",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 239,
+              "Green": 245,
+              "Blue": 237
+            },
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "hs2Buffer",
+              "UseBuffer": true,
+              "BufferSize": 5
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "hs3",
+            "X": 58,
+            "Y": 140,
+            "Width": 52,
+            "Height": 24,
+            "Visible": false,
+            "TextId": "__SingleUse_X9DT",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 239,
+              "Green": 245,
+              "Blue": 237
+            },
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "hs3Buffer",
+              "UseBuffer": true,
+              "BufferSize": 5
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "hs4",
+            "X": 58,
+            "Y": 164,
+            "Width": 52,
+            "Height": 24,
+            "Visible": false,
+            "TextId": "__SingleUse_CGML",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 239,
+              "Green": 245,
+              "Blue": 237
+            },
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "hs4Buffer",
+              "UseBuffer": true,
+              "BufferSize": 5
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "hs4n",
+            "X": 165,
+            "Y": 164,
+            "Width": 52,
+            "Height": 24,
+            "Visible": false,
+            "TextId": "__SingleUse_9OIY",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 239,
+              "Green": 245,
+              "Blue": 237
+            },
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "hs4nBuffer",
+              "UseBuffer": true,
+              "BufferSize": 5
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "hs3n",
+            "X": 165,
+            "Y": 140,
+            "Width": 52,
+            "Height": 24,
+            "Visible": false,
+            "TextId": "__SingleUse_QASN",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 239,
+              "Green": 245,
+              "Blue": 237
+            },
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "hs3nBuffer",
+              "UseBuffer": true,
+              "BufferSize": 5
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "hs2n",
+            "X": 165,
+            "Y": 116,
+            "Width": 52,
+            "Height": 24,
+            "Visible": false,
+            "TextId": "__SingleUse_X4OP",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 239,
+              "Green": 245,
+              "Blue": 237
+            },
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "hs2nBuffer",
+              "UseBuffer": true,
+              "BufferSize": 5
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "hs1n",
+            "X": 165,
+            "Y": 92,
+            "Width": 52,
+            "Height": 24,
+            "Visible": false,
+            "TextId": "__SingleUse_MCGZ",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 239,
+              "Green": 245,
+              "Blue": 237
+            },
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "hs1nBuffer",
+              "UseBuffer": true,
+              "BufferSize": 5
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "hs0n",
+            "X": 165,
+            "Y": 68,
+            "Width": 52,
+            "Height": 24,
+            "Visible": false,
+            "TextId": "__SingleUse_NV7F",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 239,
+              "Green": 245,
+              "Blue": 237
+            },
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "hs0nBuffer",
+              "UseBuffer": true,
+              "BufferSize": 5
+            }
+          },
+          {
+            "Type": "TextArea",
+            "Name": "enterName",
+            "X": 132,
+            "Y": 115,
+            "Width": 56,
+            "Height": 24,
+            "Visible": false,
+            "TextId": "__SingleUse_UN09",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 247,
+              "Green": 242,
+              "Blue": 242
+            },
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "enterNameBuffer",
+              "UseBuffer": true,
+              "BufferSize": 5
+            }
+          }
+        ],
+        "Interactions": [
+          {
+            "InteractionName": "moveBallInteraction",
+            "Trigger": {
+              "Type": "TriggerOnEveryTick",
+              "TickCount": 1
+            },
+            "Action": {
+              "Type": "ActionCustom",
+              "FunctionName": "moveBall"
+            }
+          }
+        ]
+      }
+    ],
+    "CustomContainerDefinitions": [],
+    "Name": "MyApplication",
+    "Resolution": {
+      "Width": 320,
+      "Height": 240
+    },
+    "SelectedColorDepth": 16,
+    "StartupScreenName": "Screen1",
+    "SelectedStartupLanguage": "GB",
+    "TouchGfxPath": "../Middlewares/ST/touchgfx",
+    "UIPath": ".",
+    "AvailableColorDepths": [
+      16
+    ],
+    "AvailableLCDs": {
+      "16": "LCD16bpp"
+    },
+    "AvailableSections": [
+      "ExtFlashSection",
+      "IntFlashSection"
+    ],
+    "AvailableResolutions": [
+      {
+        "Width": 320,
+        "Height": 240
+      }
+    ],
+    "PhysicalButtons": [],
+    "FrameworkFeatures": {
+      "LCD16bpp": {
+        "Id": "LCD16bpp",
+        "IsEnabled": true
+      }
+    },
+    "GenerateAssetsCommand": "make -f simulator/gcc/Makefile assets -j8",
+    "PostGenerateCommand": "touchgfx update_project --project-file=simulator/msvs/Application.vcxproj",
+    "PostGenerateTargetCommand": "touchgfx update_project",
+    "CompileSimulatorCommand": "make -f simulator/gcc/Makefile -j8",
+    "RunSimulatorCommand": "build\\bin\\simulator.exe",
+    "LandscapeSkinX": 0,
+    "LandscapeSkinY": 0,
+    "PortraitSkinX": 0,
+    "PortraitSkinY": 0,
+    "DisplayOrientation": "Landscape",
+    "Family": "STM32L4",
+    "SubFamily": "STM32L4x6",
+    "Toolchain": "STM32CubeIDE",
+    "Platform": "m4",
+    "ProjectFile": "../nucleol476_tgfx_ili9341_breakout.ioc",
+    "OptionalComponentsRoot": "../Middlewares/ST/touchgfx_components",
+    "OptionalComponents": [],
+    "AdditionalFeatures": []
+  },
+  "Version": "4.22.0"
+}

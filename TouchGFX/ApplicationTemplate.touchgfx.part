@@ -1,0 +1,30 @@
+
+{
+  "Application": {
+    "Name": "nucleol476_tgfx_ili9341_breakout",
+    "TouchGfxPath": "../Middlewares/ST/touchgfx",
+    "AvailableColorDepths": [ 16 ],
+    "AvailableLCDs":
+    {
+      "16": "LCD16bpp"
+    },
+    "AvailableResolutions": [
+      {
+        "Width": 320,
+        "Height": 240
+      }
+    ],
+    "PostGenerateTargetCommand": "touchgfx update_project",
+    "Family": "STM32L4",
+    "SubFamily": "STM32L4x6",
+    "Platform": "m4",
+    "Toolchain": "STM32CubeIDE",
+    "ProjectFile": "../nucleol476_tgfx_ili9341_breakout.ioc",
+    "OptionalComponentsRoot": "../Middlewares/ST/touchgfx_components",
+    "OptionalComponents": [
+    ],
+    "AdditionalFeatures": [
+    ]
+  },
+  "Version": "4.26.0"
+}
