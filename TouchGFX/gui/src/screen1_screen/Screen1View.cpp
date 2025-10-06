@@ -63,8 +63,8 @@ void Screen1View::setupScreen()
     gameState.score = 0;
     gameState.ballX = SCREEN_WIDTH / 2;
     gameState.ballY = SCREEN_HEIGHT / 2;
-    gameState.ballSpeedX = 1;
-    gameState.ballSpeedY = 1;
+    gameState.ballSpeedX = MIN_BALL_SPEED;
+    gameState.ballSpeedY = MIN_BALL_SPEED;
     gameState.paddleX = (SCREEN_WIDTH - PADDLE_WIDTH) / 2;
     gameState.newHighScore = false;
     gameState.gameOver = false;

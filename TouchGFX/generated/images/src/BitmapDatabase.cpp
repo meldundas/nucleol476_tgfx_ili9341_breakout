@@ -9,9 +9,9 @@ extern const unsigned char image_ball[]; // BITMAP_BALL_ID = 1, Size: 128x128 pi
 extern const unsigned char image_breakout_pieces[]; // BITMAP_BREAKOUT_PIECES_ID = 2, Size: 352x200 pixels
 
 const touchgfx::Bitmap::BitmapData bitmap_database[] = {
-    { image_backsmall, 0, 320, 240, 0, 0, 320, ((uint8_t)touchgfx::Bitmap::RGB565) >> 3, 240, ((uint8_t)touchgfx::Bitmap::RGB565) & 0x7 },
+    { image_backsmall, 0, 320, 240, 0, 0, 320, ((uint8_t)touchgfx::Bitmap::COMPRESSED_RGB565) >> 3, 240, ((uint8_t)touchgfx::Bitmap::COMPRESSED_RGB565) & 0x7 },
     { image_ball, 0, 128, 128, 19, 19, 90, ((uint8_t)touchgfx::Bitmap::ARGB8888) >> 3, 90, ((uint8_t)touchgfx::Bitmap::ARGB8888) & 0x7 },
-    { image_breakout_pieces, 0, 352, 200, 214, 153, 60, ((uint8_t)touchgfx::Bitmap::ARGB8888) >> 3, 16, ((uint8_t)touchgfx::Bitmap::ARGB8888) & 0x7 }
+    { image_breakout_pieces, 0, 352, 200, 214, 153, 60, ((uint8_t)touchgfx::Bitmap::COMPRESSED_ARGB8888) >> 3, 16, ((uint8_t)touchgfx::Bitmap::COMPRESSED_ARGB8888) & 0x7 }
 };
 
 namespace BitmapDatabase
