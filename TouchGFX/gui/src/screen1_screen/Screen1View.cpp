@@ -34,7 +34,6 @@ struct Brick
 {
     touchgfx::TiledImage* brick;
     int score;
-    bool visible;
 };
 
 struct Level
@@ -44,6 +43,8 @@ struct Level
 };
 
 const Level levels[] = {
+	// Add 36 'true' or 'false' values here for your brick layout
+
     // Level 1
     {
         {
@@ -67,7 +68,6 @@ const Level levels[] = {
 	// Level 3
 	{
 	    {
-	    // Add 36 'true' or 'false' values here for your brick layout
 	    true, true, true, true, true, true, true, true, true,
 	    true, false, true, false, true, false, true, false, true,
 	    true, true, true, true, true, true, true, true, true,
@@ -203,8 +203,7 @@ void Screen1View::loadLevel(int levelNumber)
 
     for (int i = 0; i < TOTAL_BRICKS; ++i)
     {
-        bricks[i].visible = level.layout[i];
-        bricks[i].brick->setVisible(bricks[i].visible);
+        bricks[i].brick->setVisible(level.layout[i]);
         bricks[i].brick->invalidate();
     }
 
