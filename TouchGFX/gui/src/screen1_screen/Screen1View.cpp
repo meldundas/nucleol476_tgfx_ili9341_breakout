@@ -28,17 +28,58 @@ const int TOTAL_BRICKS = NUM_BRICK_ROWS * NUM_BRICK_COLS;
 // Game constants
 const int INITIAL_LIVES = 3;
 const int MAX_BALL_SPEED = 8;
-const int MIN_BALL_SPEED = 3;
+const int MIN_BALL_SPEED = 2;
 
 struct Brick
 {
     touchgfx::TiledImage* brick;
     int score;
+    bool visible;
 };
 
+struct Level
+{
+    bool layout[TOTAL_BRICKS];
+    int visibleBricks;
+};
+
+const Level levels[] = {
+    // Level 1
+    {
+        {
+            true, true, true, true, true, true, true, true, true,
+            true, true, true, true, true, true, true, true, true,
+            true, true, true, true, true, true, true, true, true,
+            true, true, true, true, true, true, true, true, true,
+        },
+        36
+    },
+    // Level 2
+    {
+        {
+            true, true, true, true, true, true, true, true, true,
+            true, true, true, false, false, false, true, true, true,
+            true, true, false, true, false, true, false, true, true,
+            true, false, true, false, true, false, true, false, true,
+        },
+        26
+    },
+	// Level 3
+	{
+	    {
+	    // Add 36 'true' or 'false' values here for your brick layout
+	    true, true, true, true, true, true, true, true, true,
+	    true, false, true, false, true, false, true, false, true,
+	    true, true, true, true, true, true, true, true, true,
+	    false, true, false, true, false, true, false, true, false,
+	    },
+	    27 // The number of 'true' values in the layout above
+	}
+
+};
+const int NUM_LEVELS = sizeof(levels) / sizeof(Level);
+
 bool checkCollision(const touchgfx::TiledImage& brick);
-
-
 
 GameState gameState;
 Brick bricks[TOTAL_BRICKS];
@@ -46,6 +87,8 @@ uint8_t newName[5] = "AAAA";
 Unicode::UnicodeChar buffer[20];
 static int selectedChar = 0;
 
+//game level
+int LEVEL = 1;
 
 
 Screen1View::Screen1View()
@@ -69,7 +112,6 @@ void Screen1View::setupScreen()
     gameState.newHighScore = false;
     gameState.gameOver = false;
     gameState.gameWin = false;
-    gameState.visibleBricks = TOTAL_BRICKS;
 
     Unicode::snprintf(livesTextAreaBuffer, LIVESTEXTAREA_SIZE, "%d", gameState.lives);
     Unicode::snprintf(scoreTextAreaBuffer, SCORETEXTAREA_SIZE, "%d", gameState.score);
@@ -115,11 +157,7 @@ void Screen1View::setupScreen()
     bricks[34] = {&b1, 50};
     bricks[35] = {&b0, 50};
 
-    for (int i = 0; i < TOTAL_BRICKS; ++i)
-    {
-        bricks[i].brick->setVisible(true);
-        bricks[i].brick->invalidate();
-    }
+    loadLevel(1);
 
     gameOver.setVisible(false);
     youWin.setVisible(false);
@@ -146,6 +184,39 @@ void Screen1View::setupScreen()
 void Screen1View::tearDownScreen()
 {
     Screen1ViewBase::tearDownScreen();
+}
+
+void Screen1View::loadLevel(int levelNumber)
+{
+    if (levelNumber < 1 || levelNumber > NUM_LEVELS)
+    {
+        return;
+    }
+
+    const Level& level = levels[levelNumber - 1];
+
+    gameState.level = levelNumber;
+    LEVEL = levelNumber;
+    Unicode::snprintf(levelTextAreaBuffer, LEVELTEXTAREA_SIZE, "%d", gameState.level);
+    levelTextArea.invalidate();
+    gameState.visibleBricks = level.visibleBricks;
+
+    for (int i = 0; i < TOTAL_BRICKS; ++i)
+    {
+        bricks[i].visible = level.layout[i];
+        bricks[i].brick->setVisible(bricks[i].visible);
+        bricks[i].brick->invalidate();
+    }
+
+    // Reset ball and paddle
+    gameState.ballX = SCREEN_WIDTH / 2;
+    gameState.ballY = SCREEN_HEIGHT / 2;
+    gameState.paddleX = (SCREEN_WIDTH - PADDLE_WIDTH) / 2;
+    ball.setX(gameState.ballX);
+    ball.setY(gameState.ballY);
+    paddle.setX(gameState.paddleX);
+    ball.invalidate();
+    paddle.invalidate();
 }
 
 void Screen1View::newJoystickValue(Position newValue)
@@ -298,22 +369,28 @@ void Screen1View::moveBall()
             {
                 bricks[i].brick->setVisible(false);
                 bricks[i].brick->invalidate();
-                gameState.score += bricks[i].score;
+                gameState.score += bricks[i].score * LEVEL;
                 gameState.ballSpeedY *= -1;
                 gameState.visibleBricks--;
 
                 if (gameState.visibleBricks == 0)
                 {
-                    gameState.gameWin = true;
-
-                    if (isHighScore(gameState.score) == true)
+                    if(LEVEL < NUM_LEVELS)
                     {
-                        enterName.setVisible(true);
-                        enterName.invalidate();
+                        loadLevel(LEVEL + 1);
                     }
                     else
                     {
-                        youWin.setVisible(true);
+                        gameState.gameWin = true;
+                        if (isHighScore(gameState.score) == true)
+                        {
+                            enterName.setVisible(true);
+                            enterName.invalidate();
+                        }
+                        else
+                        {
+                            youWin.setVisible(true);
+                        }
                     }
                 }
             }
@@ -381,4 +458,3 @@ void Screen1View::displayLeaderboard()
     hs3n.invalidate();
     hs4n.invalidate();
 }
-

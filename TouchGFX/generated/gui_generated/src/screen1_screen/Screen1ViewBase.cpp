@@ -226,6 +226,16 @@ Screen1ViewBase::Screen1ViewBase()
     livesCircle.setAlpha(78);
     add(livesCircle);
 
+    levelCircle.setPosition(279, 0, 41, 38);
+    levelCircle.setCenter(20, 20);
+    levelCircle.setRadius(15);
+    levelCircle.setLineWidth(0);
+    levelCircle.setArc(0, 360);
+    levelCirclePainter.setColor(touchgfx::Color::getColorFromRGB(14, 176, 235));
+    levelCircle.setPainter(levelCirclePainter);
+    levelCircle.setAlpha(78);
+    add(levelCircle);
+
     livesTextArea.setXY(14, 7);
     livesTextArea.setColor(touchgfx::Color::getColorFromRGB(240, 228, 228));
     livesTextArea.setLinespacing(0);
@@ -236,7 +246,17 @@ Screen1ViewBase::Screen1ViewBase()
     livesTextArea.setAlpha(144);
     add(livesTextArea);
 
-    scoreTextArea.setXY(141, 9);
+    levelTextArea.setXY(287, 7);
+    levelTextArea.setColor(touchgfx::Color::getColorFromRGB(240, 228, 228));
+    levelTextArea.setLinespacing(0);
+    Unicode::snprintf(levelTextAreaBuffer, LEVELTEXTAREA_SIZE, "%s", touchgfx::TypedText(T_LIVESTEXT).getText());
+    levelTextArea.setWildcard(levelTextAreaBuffer);
+    levelTextArea.resizeToCurrentText();
+    levelTextArea.setTypedText(touchgfx::TypedText(T___SINGLEUSE_R07I));
+    levelTextArea.setAlpha(144);
+    add(levelTextArea);
+
+    scoreTextArea.setXY(134, 9);
     scoreTextArea.setColor(touchgfx::Color::getColorFromRGB(230, 189, 7));
     scoreTextArea.setLinespacing(0);
     Unicode::snprintf(scoreTextAreaBuffer, SCORETEXTAREA_SIZE, "%s", touchgfx::TypedText(T_SCOREBOARD).getText());

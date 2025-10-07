@@ -464,6 +464,24 @@
             "Alpha": 78
           },
           {
+            "Type": "Circle",
+            "Name": "levelCircle",
+            "X": 279,
+            "Width": 41,
+            "Height": 38,
+            "Color": {
+              "Red": 14,
+              "Green": 176,
+              "Blue": 235
+            },
+            "CenterX": 20.0,
+            "CenterY": 20.0,
+            "Radius": 15.0,
+            "EndAngle": 360.0,
+            "CapPrecision": "Butt",
+            "Alpha": 78
+          },
+          {
             "Type": "TextArea",
             "Name": "livesTextArea",
             "X": 14,
@@ -487,10 +505,32 @@
           },
           {
             "Type": "TextArea",
+            "Name": "levelTextArea",
+            "X": 287,
+            "Y": 7,
+            "Width": 24,
+            "Height": 20,
+            "TextId": "__SingleUse_R07I",
+            "TextRotation": "0",
+            "Color": {
+              "Red": 240,
+              "Green": 228,
+              "Blue": 228
+            },
+            "Alpha": 144,
+            "AutoSize": true,
+            "Wildcard1": {
+              "TextId": "livesText",
+              "UseBuffer": true,
+              "BufferSize": 2
+            }
+          },
+          {
+            "Type": "TextArea",
             "Name": "scoreTextArea",
-            "X": 141,
+            "X": 134,
             "Y": 9,
-            "Width": 39,
+            "Width": 52,
             "Height": 20,
             "TextId": "__SingleUse_G2QH",
             "TextRotation": "0",
@@ -504,7 +544,7 @@
             "Wildcard1": {
               "TextId": "scoreboard",
               "UseBuffer": true,
-              "BufferSize": 4
+              "BufferSize": 5
             }
           },
           {

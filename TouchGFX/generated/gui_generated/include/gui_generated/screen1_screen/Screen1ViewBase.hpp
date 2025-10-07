@@ -83,7 +83,10 @@ protected:
     touchgfx::TextArea gameOver;
     touchgfx::Circle livesCircle;
     touchgfx::PainterRGB565 livesCirclePainter;
+    touchgfx::Circle levelCircle;
+    touchgfx::PainterRGB565 levelCirclePainter;
     touchgfx::TextAreaWithOneWildcard livesTextArea;
+    touchgfx::TextAreaWithOneWildcard levelTextArea;
     touchgfx::TextAreaWithOneWildcard scoreTextArea;
     touchgfx::TextArea youWin;
     touchgfx::TextAreaWithOneWildcard hs0;
@@ -103,7 +106,9 @@ protected:
      */
     static const uint16_t LIVESTEXTAREA_SIZE = 2;
     touchgfx::Unicode::UnicodeChar livesTextAreaBuffer[LIVESTEXTAREA_SIZE];
-    static const uint16_t SCORETEXTAREA_SIZE = 4;
+    static const uint16_t LEVELTEXTAREA_SIZE = 2;
+    touchgfx::Unicode::UnicodeChar levelTextAreaBuffer[LEVELTEXTAREA_SIZE];
+    static const uint16_t SCORETEXTAREA_SIZE = 5;
     touchgfx::Unicode::UnicodeChar scoreTextAreaBuffer[SCORETEXTAREA_SIZE];
     static const uint16_t HS0_SIZE = 5;
     touchgfx::Unicode::UnicodeChar hs0Buffer[HS0_SIZE];

@@ -22,6 +22,7 @@ typedef struct GameState
     bool gameOver;
     bool gameWin;
     int visibleBricks;
+    int level;
 } GameState;
 
 #endif /* INC_STRUCTS_H_ */

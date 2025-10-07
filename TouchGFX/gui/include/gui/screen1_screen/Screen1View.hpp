@@ -18,6 +18,8 @@ public:
 
     void displayLeaderboard();
 
+    void loadLevel(int levelNumber);
+
 protected:
 };
 
