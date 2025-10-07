@@ -16,7 +16,7 @@ const int BALL_CENTER = BALL_SIZE / 2;
 // Paddle constants
 const int PADDLE_WIDTH = 61;
 const int PADDLE_HEIGHT = 15;
-const int PADDLE_SPEED = 5;
+const int PADDLE_SPEED = 7; //was 5
 
 // Brick constants
 const int BRICK_WIDTH = 30;
@@ -89,6 +89,7 @@ static int selectedChar = 0;
 
 //game level
 int LEVEL = 1;
+bool levelStarted = false;
 
 
 Screen1View::Screen1View()
@@ -106,8 +107,8 @@ void Screen1View::setupScreen()
     gameState.score = 0;
     gameState.ballX = SCREEN_WIDTH / 2;
     gameState.ballY = SCREEN_HEIGHT / 2;
-    gameState.ballSpeedX = MIN_BALL_SPEED;
-    gameState.ballSpeedY = MIN_BALL_SPEED;
+    // gameState.ballSpeedX = MIN_BALL_SPEED;
+    // gameState.ballSpeedY = MIN_BALL_SPEED;
     gameState.paddleX = (SCREEN_WIDTH - PADDLE_WIDTH) / 2;
     gameState.newHighScore = false;
     gameState.gameOver = false;
@@ -208,14 +209,24 @@ void Screen1View::loadLevel(int levelNumber)
     }
 
     // Reset ball and paddle
-    gameState.ballX = SCREEN_WIDTH / 2;
-    gameState.ballY = SCREEN_HEIGHT / 2;
     gameState.paddleX = (SCREEN_WIDTH - PADDLE_WIDTH) / 2;
+    gameState.ballX = gameState.paddleX + (PADDLE_WIDTH / 2) - BALL_CENTER;
+    gameState.ballY = paddle.getY() - BALL_SIZE;
     ball.setX(gameState.ballX);
     ball.setY(gameState.ballY);
     paddle.setX(gameState.paddleX);
     ball.invalidate();
     paddle.invalidate();
+
+    int current_min_speed = MIN_BALL_SPEED + (levelNumber - 1);
+    if (current_min_speed > MAX_BALL_SPEED)
+    {
+        current_min_speed = MAX_BALL_SPEED;
+    }
+    gameState.ballSpeedX = current_min_speed;
+    gameState.ballSpeedY = current_min_speed;
+
+    levelStarted = false;
 }
 
 void Screen1View::newJoystickValue(Position newValue)
@@ -270,6 +281,13 @@ void Screen1View::newJoystickValue(Position newValue)
     }
     else //if (!gameState.gameOver && !gameState.gameWin)
     {
+        if (!levelStarted)
+        {
+            if (HAL_GPIO_ReadPin(JOYSTICK_SW_GPIO_Port, JOYSTICK_SW_Pin) == GPIO_PIN_RESET)
+            {
+                levelStarted = true;
+            }
+        }
         paddle.invalidate(); // Invalidate old paddle position
         // move paddle
         if (newValue.y > 60) // left
@@ -296,6 +314,16 @@ void Screen1View::moveBall()
 {
     if (gameState.gameOver || gameState.gameWin)
     {
+        return;
+    }
+
+    if (!levelStarted)
+    {
+        // Ball follows the paddle
+        ball.invalidate();
+        gameState.ballX = gameState.paddleX + (PADDLE_WIDTH / 2) - BALL_CENTER;
+        ball.setX(gameState.ballX);
+        ball.invalidate();
         return;
     }
 
@@ -350,13 +378,45 @@ void Screen1View::moveBall()
     }
 
     // Paddle collision
+    bool collision_handled = false;
+
+    // Top collision
+    int prevBallY = gameState.ballY - gameState.ballSpeedY;
     if (gameState.ballSpeedY > 0 && // Check if the ball is moving downwards
-        gameState.ballY + BALL_SIZE >= paddle.getY() &&
+        prevBallY + BALL_SIZE <= paddle.getY() &&
+        gameState.ballY + BALL_SIZE > paddle.getY() &&
         gameState.ballX + BALL_CENTER >= gameState.paddleX &&
         gameState.ballX + BALL_CENTER <= gameState.paddleX + PADDLE_WIDTH)
     {
         gameState.ballSpeedY *= -1;
         gameState.ballY = paddle.getY() - BALL_SIZE; // Move ball to the top of the paddle
+        collision_handled = true;
+    }
+
+    // Side collision
+    if (!collision_handled &&
+        (gameState.ballY + BALL_SIZE > paddle.getY() && gameState.ballY < paddle.getY() + PADDLE_HEIGHT))
+    {
+        int prevBallX = gameState.ballX - gameState.ballSpeedX;
+
+        // Left side
+        if (gameState.ballSpeedX > 0 && // moving right
+            prevBallX + BALL_SIZE <= gameState.paddleX &&
+            gameState.ballX + BALL_SIZE > gameState.paddleX)
+        {
+            gameState.ballSpeedX *= -1;
+            collision_handled = true;
+        }
+
+        // Right side
+        if (!collision_handled &&
+            gameState.ballSpeedX < 0 && // moving left
+            prevBallX >= gameState.paddleX + PADDLE_WIDTH &&
+            gameState.ballX < gameState.paddleX + PADDLE_WIDTH)
+        {
+            gameState.ballSpeedX *= -1;
+            collision_handled = true;
+        }
     }
 
     // Brick collision
