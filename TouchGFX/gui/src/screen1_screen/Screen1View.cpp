@@ -16,7 +16,7 @@ const int BALL_CENTER = BALL_SIZE / 2;
 // Paddle constants
 const int PADDLE_WIDTH = 61;
 const int PADDLE_HEIGHT = 15;
-const int PADDLE_SPEED = 7; //was 5
+const int PADDLE_SPEED = 5; //was 5 7
 
 // Brick constants
 const int BRICK_WIDTH = 30;
@@ -53,7 +53,7 @@ const Level levels[] = {
             true, true, true, true, true, true, true, true, true,
             true, true, true, true, true, true, true, true, true,
         },
-        36
+        36 // The number of 'true' values in the layout above
     },
     // Level 2
     {
@@ -68,13 +68,24 @@ const Level levels[] = {
 	// Level 3
 	{
 	    {
-	    true, true, true, true, true, true, true, true, true,
-	    true, false, true, false, true, false, true, false, true,
-	    true, true, true, true, true, true, true, true, true,
-	    false, true, false, true, false, true, false, true, false,
+			true, true, true, true, true, true, true, true, true,
+			true, false, true, false, true, false, true, false, true,
+			true, true, true, true, true, true, true, true, true,
+			false, true, false, true, false, true, false, true, false,
 	    },
-	    27 // The number of 'true' values in the layout above
+	    27
+	},
+	// Level 4
+	{
+	    {
+			true, true, true, true, true, true, true, true, true,
+			true, false, true, false, true, false, true, false, true,
+			true, false, true, false, true, false, true, false, true,
+			true, false, false, false, false, false, false, false, true,
+	    },
+	    21
 	}
+
 
 };
 const int NUM_LEVELS = sizeof(levels) / sizeof(Level);
