@@ -20,7 +20,11 @@ public:
 
     void loadLevel(int levelNumber);
 
+    virtual void handleTickEvent();
+
 protected:
+    int tickCounter;
+    bool blinkState;
 };
 
 #endif // SCREEN1VIEW_HPP

@@ -12,7 +12,7 @@
       <Text Id="enterNameBuffer" Alignment="Left" TypographyId="Large">
         <Translation Language="GB">AAAA</Translation>
       </Text>
-      <Text Id="__SingleUse_UN09" Alignment="Left" TypographyId="Default">
+      <Text Id="__SingleUse_UN09" Alignment="Left" TypographyId="SpaceMonoRegular">
         <Translation Language="GB">&lt;value&gt;</Translation>
       </Text>
       <Text Id="hs4nBuffer" Alignment="Left" TypographyId="Default">
@@ -99,5 +99,6 @@
     <Typography Id="Default" Font="verdana.ttf" Size="20" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0x20-0x7a" />
     <Typography Id="Large" Font="verdana.ttf" Size="40" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0x20-0x7a" />
     <Typography Id="Small" Font="verdana.ttf" Size="10" Bpp="4" IsVector="no" Direction="LTR" FallbackCharacter="?" />
+    <Typography Id="SpaceMonoRegular" Font="SpaceMono-Regular.ttf" Size="24" Bpp="4" IsVector="no" IsCompressed="yes" Direction="LTR" FallbackCharacter="?" WildcardCharacterRanges="0x20-0x7a" />
   </Typographies>
 </TextDatabase>

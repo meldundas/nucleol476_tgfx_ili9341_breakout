@@ -373,14 +373,12 @@ Screen1ViewBase::Screen1ViewBase()
     hs0n.setVisible(false);
     add(hs0n);
 
-    enterName.setXY(132, 115);
+    enterName.setPosition(130, 110, 60, 35);
     enterName.setColor(touchgfx::Color::getColorFromRGB(247, 242, 242));
     enterName.setLinespacing(0);
     Unicode::snprintf(enterNameBuffer, ENTERNAME_SIZE, "%s", touchgfx::TypedText(T_ENTERNAMEBUFFER).getText());
     enterName.setWildcard(enterNameBuffer);
-    enterName.resizeToCurrentText();
     enterName.setTypedText(touchgfx::TypedText(T___SINGLEUSE_UN09));
-    enterName.setVisible(false);
     add(enterName);
 }
 

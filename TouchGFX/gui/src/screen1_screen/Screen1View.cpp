@@ -1,9 +1,12 @@
 #include <gui/screen1_screen/Screen1View.hpp>
+#include <texts/TextKeysAndLanguages.hpp>
 #include <string.h>
 #include <stdlib.h> //rand
 #include "main.h"
 #include "leaderboard.h"
 #include "structs.h"
+
+extern Position joystickPosition;
 
 // Screen dimension constants
 const int SCREEN_WIDTH = 320;
@@ -104,6 +107,7 @@ bool levelStarted = false;
 
 
 Screen1View::Screen1View()
+    : tickCounter(0), blinkState(false)
 {
 
 }
@@ -175,6 +179,9 @@ void Screen1View::setupScreen()
     youWin.setVisible(false);
     enterName.setVisible(false);
 
+    enterName.setWidth(100);
+    enterName.setTypedText(touchgfx::TypedText(T___SINGLEUSE_UN09));
+
     hs0.setVisible(false);
     hs1.setVisible(false);
     hs2.setVisible(false);
@@ -196,6 +203,70 @@ void Screen1View::setupScreen()
 void Screen1View::tearDownScreen()
 {
     Screen1ViewBase::tearDownScreen();
+}
+
+void Screen1View::handleTickEvent()
+{
+    moveBall();
+
+    if (!enterName.isVisible())
+    {
+        if (!levelStarted)
+        {
+            if (HAL_GPIO_ReadPin(JOYSTICK_SW_GPIO_Port, JOYSTICK_SW_Pin) == GPIO_PIN_RESET)
+            {
+                levelStarted = true;
+            }
+        }
+        paddle.invalidate(); // Invalidate old paddle position
+        // move paddle
+        if (joystickPosition.y > 60) // left
+        {
+            gameState.paddleX -= PADDLE_SPEED;
+        }
+
+        if (joystickPosition.y < 40) // right
+        {
+            gameState.paddleX += PADDLE_SPEED;
+        }
+
+        if (gameState.paddleX < 0)
+            gameState.paddleX = 0;
+        if (gameState.paddleX + PADDLE_WIDTH > SCREEN_WIDTH)
+            gameState.paddleX = SCREEN_WIDTH - PADDLE_WIDTH;
+
+        paddle.setX(gameState.paddleX);
+        paddle.invalidate(); // Invalidate new paddle position
+    }
+    else
+    {
+        if (HAL_GPIO_ReadPin(JOYSTICK_SW_GPIO_Port, JOYSTICK_SW_Pin) == GPIO_PIN_RESET) // Joystick button pressed
+        {
+            updateLeaderboard(newName);
+            enterName.setVisible(false);
+            enterName.invalidate();
+
+            // update leaderboard scores display
+            displayLeaderboard();
+        }
+    }
+
+    tickCounter++;
+    if (tickCounter % 30 == 0) // Adjust the blinking speed here
+    {
+        blinkState = !blinkState;
+        if (enterName.isVisible())
+        {
+            Unicode::UnicodeChar tempName[5];
+            Unicode::strncpy(tempName, (const char*)newName, 5);
+            if (blinkState)
+            {
+                tempName[selectedChar] = '_';
+            }
+            Unicode::strncpy(enterNameBuffer, tempName, ENTERNAME_SIZE);
+            enterName.invalidate();
+        }
+    }
 }
 
 void Screen1View::loadLevel(int levelNumber)
@@ -252,12 +323,14 @@ void Screen1View::newJoystickValue(Position newValue)
             selectedChar--;
             if (selectedChar < 0)
                 selectedChar = 3;
+            blinkState = false;
         }
         else if (newValue.y < 45 && lastValue.y >= 45) // Right
         {
             selectedChar++;
             if (selectedChar > 3)
                 selectedChar = 0;
+            blinkState = false;
         }
 
         // Vertical movement (change character)
@@ -266,59 +339,20 @@ void Screen1View::newJoystickValue(Position newValue)
             newName[selectedChar]++;
             if (newName[selectedChar] > 'Z')
                 newName[selectedChar] = 'A';
+            blinkState = false;
         }
         else if (newValue.x > 80 && lastValue.x <= 80) // Down
         {
             newName[selectedChar]--;
             if (newName[selectedChar] < 'A')
                 newName[selectedChar] = 'Z';
+            blinkState = false;
         }
-
-        lastValue = newValue;
 
         Unicode::strncpy(enterNameBuffer, (const char*)newName, ENTERNAME_SIZE);
         enterName.invalidate();
-
-        if (HAL_GPIO_ReadPin(JOYSTICK_SW_GPIO_Port, JOYSTICK_SW_Pin) == GPIO_PIN_RESET) // Joystick button pressed
-        {
-            updateLeaderboard(newName);
-            enterName.setVisible(false);
-
-            // update leaderboard scores display
-            displayLeaderboard();
-        }
-
-
     }
-    else //if (!gameState.gameOver && !gameState.gameWin)
-    {
-        if (!levelStarted)
-        {
-            if (HAL_GPIO_ReadPin(JOYSTICK_SW_GPIO_Port, JOYSTICK_SW_Pin) == GPIO_PIN_RESET)
-            {
-                levelStarted = true;
-            }
-        }
-        paddle.invalidate(); // Invalidate old paddle position
-        // move paddle
-        if (newValue.y > 60) // left
-        {
-            gameState.paddleX -= PADDLE_SPEED;
-        }
-
-        if (newValue.y < 40) // right
-        {
-            gameState.paddleX += PADDLE_SPEED;
-        }
-
-        if (gameState.paddleX < 0)
-            gameState.paddleX = 0;
-        if (gameState.paddleX + PADDLE_WIDTH > SCREEN_WIDTH)
-            gameState.paddleX = SCREEN_WIDTH - PADDLE_WIDTH;
-
-        paddle.setX(gameState.paddleX);
-        paddle.invalidate(); // Invalidate new paddle position
-    }
+    lastValue = newValue;
 }
 
 void Screen1View::moveBall()

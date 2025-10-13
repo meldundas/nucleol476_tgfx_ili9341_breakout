@@ -787,11 +787,10 @@
           {
             "Type": "TextArea",
             "Name": "enterName",
-            "X": 132,
-            "Y": 115,
-            "Width": 56,
-            "Height": 20,
-            "Visible": false,
+            "X": 130,
+            "Y": 110,
+            "Width": 60,
+            "Height": 35,
             "TextId": "__SingleUse_UN09",
             "TextRotation": "0",
             "Color": {
@@ -799,7 +798,6 @@
               "Green": 242,
               "Blue": 242
             },
-            "AutoSize": true,
             "Wildcard1": {
               "TextId": "enterNameBuffer",
               "UseBuffer": true,

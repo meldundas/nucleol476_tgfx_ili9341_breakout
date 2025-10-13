@@ -18,15 +18,20 @@ Position Model::getJoystick()
 #endif
 }
 
-Model::Model() : modelListener(0	)
+Model::Model() : modelListener(0), lastJoystickPosition({50, 50})
 {
 
 }
 
 void Model::tick()
 {
-	if(modelListener!=0)
-	{
-		modelListener->newJoystickValue(getJoystick());
-	}
+    if(modelListener!=0)
+    {
+        Position currentJoystickPosition = getJoystick();
+        if (currentJoystickPosition.x != lastJoystickPosition.x || currentJoystickPosition.y != lastJoystickPosition.y)
+        {
+            modelListener->newJoystickValue(currentJoystickPosition);
+            lastJoystickPosition = currentJoystickPosition;
+        }
+    }
 }

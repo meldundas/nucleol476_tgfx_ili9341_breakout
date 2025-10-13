@@ -20,6 +20,7 @@ public:
     void tick();
 protected:
     ModelListener* modelListener;
+    Position lastJoystickPosition;
 };
 
 #endif // MODEL_HPP
