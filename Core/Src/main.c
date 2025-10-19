@@ -20,6 +20,7 @@
 #include "main.h"
 #include "adc.h"
 #include "crc.h"
+#include "dac.h"
 #include "dma.h"
 #include "rtc.h"
 #include "spi.h"
@@ -36,7 +37,7 @@
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
+extern TIM_HandleTypeDef htim8;
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -113,6 +114,9 @@ int main(void)
   MX_TIM3_Init();
   MX_ADC1_Init();
   MX_RTC_Init();
+  MX_DAC1_Init();
+  MX_TIM1_Init();
+  MX_TIM8_Init();
   MX_TouchGFX_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim3);			//start tim3 for updating display refresh
@@ -123,7 +127,6 @@ int main(void)
   Displ_BackLight('I');  					// (mandatory) initialize backlight
 
   initScores();
-
 
   /* USER CODE END 2 */
 

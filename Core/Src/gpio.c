@@ -65,18 +65,18 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : JOYSTICK_SW_Pin */
-  GPIO_InitStruct.Pin = JOYSTICK_SW_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(JOYSTICK_SW_GPIO_Port, &GPIO_InitStruct);
-
   /*Configure GPIO pin : DISPL_DC_Pin */
   GPIO_InitStruct.Pin = DISPL_DC_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(DISPL_DC_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : JOYSTICK_SW_Pin */
+  GPIO_InitStruct.Pin = JOYSTICK_SW_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(JOYSTICK_SW_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pin : TOUCH_CS_Pin */
   GPIO_InitStruct.Pin = TOUCH_CS_Pin;

@@ -379,6 +379,7 @@ Screen1ViewBase::Screen1ViewBase()
     Unicode::snprintf(enterNameBuffer, ENTERNAME_SIZE, "%s", touchgfx::TypedText(T_ENTERNAMEBUFFER).getText());
     enterName.setWildcard(enterNameBuffer);
     enterName.setTypedText(touchgfx::TypedText(T___SINGLEUSE_UN09));
+    enterName.setVisible(false);
     add(enterName);
 }
 

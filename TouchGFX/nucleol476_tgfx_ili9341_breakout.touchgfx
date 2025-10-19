@@ -791,6 +791,7 @@
             "Y": 110,
             "Width": 60,
             "Height": 35,
+            "Visible": false,
             "TextId": "__SingleUse_UN09",
             "TextRotation": "0",
             "Color": {

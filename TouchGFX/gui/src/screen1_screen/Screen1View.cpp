@@ -6,6 +6,10 @@
 #include "leaderboard.h"
 #include "structs.h"
 
+extern "C" {
+#include "sound.h"
+}
+
 extern Position joystickPosition;
 
 // Screen dimension constants
@@ -207,8 +211,6 @@ void Screen1View::tearDownScreen()
 
 void Screen1View::handleTickEvent()
 {
-    moveBall();
-
     if (!enterName.isVisible())
     {
         if (!levelStarted)
@@ -251,6 +253,8 @@ void Screen1View::handleTickEvent()
         }
     }
 
+    moveBall();
+
     tickCounter++;
     if (tickCounter % 30 == 0) // Adjust the blinking speed here
     {
@@ -290,6 +294,9 @@ void Screen1View::loadLevel(int levelNumber)
         bricks[i].brick->invalidate();
     }
 
+    paddle.setVisible(false);
+    paddle.invalidate();
+
     // Reset ball and paddle
     gameState.paddleX = (SCREEN_WIDTH - PADDLE_WIDTH) / 2;
     gameState.ballX = gameState.paddleX + (PADDLE_WIDTH / 2) - BALL_CENTER;
@@ -298,6 +305,7 @@ void Screen1View::loadLevel(int levelNumber)
     ball.setY(gameState.ballY);
     paddle.setX(gameState.paddleX);
     ball.invalidate();
+    paddle.setVisible(true);
     paddle.invalidate();
 
     int current_min_speed = MIN_BALL_SPEED + (levelNumber - 1);
@@ -336,16 +344,24 @@ void Screen1View::newJoystickValue(Position newValue)
         // Vertical movement (change character)
         if (newValue.x < 20 && lastValue.x >= 20) // Up
         {
-            newName[selectedChar]++;
-            if (newName[selectedChar] > 'Z')
+            if (newName[selectedChar] == 'Z') {
+                newName[selectedChar] = ' ';
+            } else if (newName[selectedChar] == ' ') {
                 newName[selectedChar] = 'A';
+            } else {
+                newName[selectedChar]++;
+            }
             blinkState = false;
         }
         else if (newValue.x > 80 && lastValue.x <= 80) // Down
         {
-            newName[selectedChar]--;
-            if (newName[selectedChar] < 'A')
+            if (newName[selectedChar] == 'A') {
+                newName[selectedChar] = ' ';
+            } else if (newName[selectedChar] == ' ') {
                 newName[selectedChar] = 'Z';
+            } else {
+                newName[selectedChar]--;
+            }
             blinkState = false;
         }
 
@@ -381,11 +397,13 @@ void Screen1View::moveBall()
     if (gameState.ballX > SCREEN_WIDTH - BALL_SIZE || gameState.ballX < 0)
     {
         gameState.ballSpeedX *= -1;
+        play_tone(200);
     }
 
     if (gameState.ballY < 0)
     {
         gameState.ballSpeedY *= -1;
+        play_tone(200);
     }
 
     // Bottom of screen
@@ -425,43 +443,57 @@ void Screen1View::moveBall()
     // Paddle collision
     bool collision_handled = false;
 
-    // Top collision
-    int prevBallY = gameState.ballY - gameState.ballSpeedY;
-    if (gameState.ballSpeedY > 0 && // Check if the ball is moving downwards
-        prevBallY + BALL_SIZE <= paddle.getY() &&
-        gameState.ballY + BALL_SIZE > paddle.getY() &&
-        gameState.ballX + BALL_CENTER >= gameState.paddleX &&
-        gameState.ballX + BALL_CENTER <= gameState.paddleX + PADDLE_WIDTH)
+    // The rectangle of the paddle in the current frame
+    int paddle_left = gameState.paddleX;
+    int paddle_right = gameState.paddleX + PADDLE_WIDTH;
+    int paddle_top = paddle.getY();
+    int paddle_bottom = paddle.getY() + PADDLE_HEIGHT;
+
+    // The rectangle of the ball in the current frame
+    int ball_left = gameState.ballX;
+    int ball_right = gameState.ballX + BALL_SIZE;
+    int ball_top = gameState.ballY;
+    int ball_bottom = gameState.ballY + BALL_SIZE;
+
+    // Check for intersection
+    if (ball_right > paddle_left && ball_left < paddle_right && ball_bottom > paddle_top && ball_top < paddle_bottom)
     {
-        gameState.ballSpeedY *= -1;
-        gameState.ballY = paddle.getY() - BALL_SIZE; // Move ball to the top of the paddle
+        // Collision detected.
+        // Find the side with the minimum penetration.
+
+        int overlap_left = ball_right - paddle_left;
+        int overlap_right = paddle_right - ball_left;
+        int overlap_top = ball_bottom - paddle_top;
+
+        int min_overlap = overlap_top;
+        int collision_side = 0; // 0: top, 1: left, 2: right
+
+        if (overlap_left < min_overlap) {
+            min_overlap = overlap_left;
+            collision_side = 1;
+        }
+        if (overlap_right < min_overlap) {
+            min_overlap = overlap_right;
+            collision_side = 2;
+        }
+
+        if (collision_side == 0) { // Top
+            gameState.ballSpeedY *= -1;
+            gameState.ballY -= overlap_top;
+        } else if (collision_side == 1) { // Left
+            gameState.ballSpeedX *= -1;
+            gameState.ballX -= overlap_left;
+        } else { // Right
+            gameState.ballSpeedX *= -1;
+            gameState.ballX += overlap_right;
+        }
+
         collision_handled = true;
     }
 
-    // Side collision
-    if (!collision_handled &&
-        (gameState.ballY + BALL_SIZE > paddle.getY() && gameState.ballY < paddle.getY() + PADDLE_HEIGHT))
+    if (collision_handled)
     {
-        int prevBallX = gameState.ballX - gameState.ballSpeedX;
-
-        // Left side
-        if (gameState.ballSpeedX > 0 && // moving right
-            prevBallX + BALL_SIZE <= gameState.paddleX &&
-            gameState.ballX + BALL_SIZE > gameState.paddleX)
-        {
-            gameState.ballSpeedX *= -1;
-            collision_handled = true;
-        }
-
-        // Right side
-        if (!collision_handled &&
-            gameState.ballSpeedX < 0 && // moving left
-            prevBallX >= gameState.paddleX + PADDLE_WIDTH &&
-            gameState.ballX < gameState.paddleX + PADDLE_WIDTH)
-        {
-            gameState.ballSpeedX *= -1;
-            collision_handled = true;
-        }
+        play_tone(200);
     }
 
     // Brick collision
@@ -471,6 +503,15 @@ void Screen1View::moveBall()
         {
             if (checkCollision(*bricks[i].brick))
             {
+                if (i < 9) {
+                    play_tone(1000); // Yellow
+                } else if (i < 18) {
+                    play_tone(800);  // Red
+                } else if (i < 27) {
+                    play_tone(600);  // Green
+                } else {
+                    play_tone(400);  // Blue
+                }
                 bricks[i].brick->setVisible(false);
                 bricks[i].brick->invalidate();
                 gameState.score += bricks[i].score * LEVEL;
