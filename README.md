@@ -1,8 +1,7 @@
-# nucleol476_tgfx_ili9341
-NucleoL476 with ILI9341 and Joystick
-Uses TouchGFX
+# nucleol476_tgfx_ili9341_breakout
+Breakout game using NucleoL476 with ILI9341 and Joystick
 
-Breakout game.
+Uses TouchGFX
 
 ![Breakout](docs/pics/breakout.jpg)
 
