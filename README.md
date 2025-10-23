@@ -6,4 +6,4 @@ Breakout game.
 
 ![Breakout](docs/pics/breakout.jpg)
 
-![Breakout Board](docs/pics/breakout1.png)
+![Breakout Board](docs/pics/breakout1.jpg)
